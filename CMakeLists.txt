@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.7)
+
+project(SSHKV)
+
+SET(CMAKE_CXX_STANDARD 11)
+
+ADD_SUBDIRECTORY(src bin)
+
+SET(CMAKE_INSTALL_PREFIX ../bin)
+
