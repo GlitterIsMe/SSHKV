@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include "../include/BlockZone.h"
+#include "../include/debug.h"
 
 namespace sshkv{
 
@@ -54,7 +55,8 @@ namespace sshkv{
         valid_data += block_size;
         valid_block_num++;
         free_block_num--;
-        printf("free block %llu\n", free_block_num);
+        DBGprint("free block %llu\n", free_block_num);
+        return SUCCESS;
     }
 
 	void BlockZone::FreeBlock(uint64_t LBA_){
@@ -131,7 +133,7 @@ namespace sshkv{
 	}
 
     uint64_t BlockZone::InvalidData() {
-        printf("free block num %llu   valid_data num %llu\n", free_block_num, valid_data);
+        DBGprint("free block num %llu   valid_data num %llu\n", free_block_num, valid_data);
         return block_num * block_size - free_block_num * block_size - valid_data;
     }
 

@@ -45,13 +45,15 @@ namespace sshkv{
 	}
 
 	STATUS WriteBuffer::Update(int hash_addr, const Slice &value) {
-		if (buffer.find(hash_addr) == buffer.end()) return FAILED;
-		else{
+		if (buffer.find(hash_addr) == buffer.end()){
+            return FAILED;
+		} else {
 			data_size -= buffer[hash_addr].size();
             delete[] buffer[hash_addr].data();
 			buffer[hash_addr] = value;
 			data_size += value.size();
 			assert(data_size < buffer_size);
+			return SUCCESS;
 		}
 	}
 

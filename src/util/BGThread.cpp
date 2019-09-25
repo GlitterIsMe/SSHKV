@@ -1,7 +1,7 @@
 //
 // Created by zzyyy on 2017/4/23.
 //
-#include <../include/BGThread.h>
+#include "../include/BGThread.h"
 
 namespace sshkv{
 	BGThread::BGThread()

@@ -180,8 +180,8 @@ namespace sshkv {
                 table[local_addr].valid = false;
                 table[local_addr].key_size = 0;
             }
-		}
-		else{
+            return SUCCESS;
+		} else {
 			return NOTFOUND;
 		}
 	}
@@ -196,6 +196,7 @@ namespace sshkv {
 
 	STATUS SCMKeyTable::SetLBA(size_t hash_addr, uint64_t LBA_) {
 		table[hash_addr - BASE].LBA = LBA_;
+		return SUCCESS;
 	}
 
 	SCMKey& SCMKeyTable::operator[](size_t hash_addr) {

@@ -3,6 +3,7 @@
 //
 #include <cstdio>
 #include "../include/SSDAllocator.h"
+#include "../include/debug.h"
 
 namespace sshkv{
 
@@ -127,7 +128,7 @@ namespace sshkv{
 			}
 		}
         zonelist[pending_zone_no]->GC_lock();
-		printf("return zone %d for GC\n", pending_zone_no);
+		DBGprint("return zone %d for GC\n", pending_zone_no);
 		//getchar();
         //pending = pending_zone_no;
 		return zonelist[pending_zone_no];
@@ -151,11 +152,11 @@ namespace sshkv{
 		for(size_t i = 0; i < zone_num; i++){
 			BlockZone* p = zonelist[i];
 			total_free_size += p->FreeBlockNum() * options.max_block_size;
-			printf("Zone %d invalid data %llu\n", i, p->InvalidData());
+			DBGprint("Zone %d invalid data %llu\n", i, p->InvalidData());
 			if(p->InvalidData() != 0) has_dirty = true;
 		}
 		double usage_ratio = 1 - (double)total_free_size / capacity;
-		printf("free : %llu, capacity %llu , %.2lf\n", total_free_size, capacity, usage_ratio);
+		DBGprint("free : %llu, capacity %llu , %.2lf\n", total_free_size, capacity, usage_ratio)
 		if (usage_ratio > 0.8 && has_dirty) return true;
 		else return false;
 	}

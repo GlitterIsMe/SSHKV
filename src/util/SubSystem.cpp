@@ -15,6 +15,7 @@
 #include "../include/DataWriter.h"
 #include "../include/DataReader.h"
 #include "../include/BGThread.h"
+#include "../include/debug.h"
 
 
 
@@ -274,7 +275,7 @@ namespace sshkv{
 				keymap->AddKey(iter->first, (*key_table)[iter->first].value_size, LBAtoBlockno(immbuffer->StartLBA()));
 				//update the LBA
                 char key[100];
-                sprintf(key, "%16d\n", iter->first);
+                sprintf(key, "%16ld\n", iter->first);
                // write(fd, key, 100);
 
 				(*key_table)[iter->first].LBA = iter->second;
@@ -311,7 +312,7 @@ namespace sshkv{
         LBA = unit->block_now->GetNumber() * options.max_block_size + LBA_start;
         //unit->zone->FreeBlock(LBA);
         allocator->FreeBlock(LBA);
-        printf("invalid data size %llu\n", unit->zone->InvalidData());
+        DBGprint("invalid data size %llu\n", unit->zone->InvalidData());
         unit->zone->AllocBlock(LBA - LBA_start, true);
 	    //unit->block_now->SetState(VALID);
         unit->been_alloc = true;
@@ -352,12 +353,12 @@ namespace sshkv{
 		unit->zone->GetBlockforGC(unit->block_list);
 
 		DoGarbageCollection(unit);
-        printf("invalid data size %llu\n", unit->zone->InvalidData());
-	FILE* fp = fopen("/home/zhangyiwen/SSHKV/GC.log", "a");
-        printf("GC reads %.2f MBs\n", (double)unit->status.total_read / (1024 * 1024));
-        printf("GC writes %.2f MBs\n", (double)unit->status.total_write / (1024 * 1024));
-        printf("GC %llu times\n", unit->status.GC_times);
-        printf("GC processing time : %llu micros\n", unit->status.end_micro - unit->status.start_micro);
+        DBGprint("invalid data size %llu\n", unit->zone->InvalidData());
+	    FILE* fp = fopen("/home/zhangyiwen/SSHKV/GC.log", "a");
+        DBGprint("GC reads %.2f MBs\n", (double)unit->status.total_read / (1024 * 1024));
+        DBGprint("GC writes %.2f MBs\n", (double)unit->status.total_write / (1024 * 1024));
+        DBGprint("GC %llu times\n", unit->status.GC_times);
+        DBGprint("GC processing time : %llu micros\n", unit->status.end_micro - unit->status.start_micro);
         getchar();
 	delete unit;
 	}
@@ -368,7 +369,7 @@ namespace sshkv{
 		//GCUnit* unit = reinterpret_cast<GCUnit*>(unit_);
         //printf("now processing GC\n");
         //STATUS  s;
-        printf("GC block num : %d\n", unit->block_list.size());
+        DBGprint("GC block num : %d\n", unit->block_list.size());
         //for(size_t i = 0; i < unit->block_list.size(); i++){
             //printf("block : %d---valid data size : %llu---state : %d\n", unit->block_list[i]->GetNumber(), unit->block_list[i]->ValidData(), unit->block_list[i]->BlockState());
         //}
@@ -504,7 +505,7 @@ namespace sshkv{
         unit->zone->GC_unlock();
 
         //printf("end GC\n");
-        unit->status.end_micro;
+        //unit->status.end_micro;
         GCworking = false;
 
 	}

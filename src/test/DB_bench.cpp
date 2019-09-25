@@ -14,11 +14,11 @@
 #include <zconf.h>
 #include <atomic>
 #include "DB.h"
-#include "DBImpl.h"
-#include "slice.h"
-#include "Options.h"
-#include "Random.h"
-#include "TestUtil.h"
+#include "../include/DBImpl.h"
+#include "../include/slice.h"
+#include "../include/Options.h"
+#include "../include/Random.h"
+#include "../include/TestUtil.h"
 
 static const char *FLAGS_benchmarks =
                 "fillseq,"
@@ -584,7 +584,7 @@ namespace sshkv {
 
             long result = 0;
             result = shared.found.load(std::memory_order_relaxed);
-            snprintf(msg, sizeof(msg), "(%ld of %ld found)", result, num_);
+            snprintf(msg, sizeof(msg), "(%ld of %d found)", result, num_);
             
 	    thread->stats.AddMessage(msg);
         }
@@ -627,7 +627,7 @@ namespace sshkv {
 
             long result = 0;
             result = shared.found.load(std::memory_order_relaxed);
-            snprintf(msg, sizeof(msg), "(%ld of %ld found)", result, num_);
+            snprintf(msg, sizeof(msg), "(%ld of %d found)", result, num_);
 
             thread->stats.AddMessage(msg);
             //fclose(fp);

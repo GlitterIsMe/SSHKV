@@ -1,7 +1,7 @@
 //
 // Created by zzyyy on 2017/4/24.
 //
-#include <slice.h>
+#include "../include/slice.h"
 #include "../include/Hash.h"
 
 namespace sshkv{
