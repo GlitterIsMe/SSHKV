@@ -20,7 +20,10 @@ namespace sshkv{
 	STATUS DataWriter::DoWrite() {
 		ssize_t r = pwrite(DISK, data.data(), data.size(), LBA);
 		//ssize_t r = write(DISK, data.data(), data.size());
-		if (r == -1) return FAILED;
+		if (r == -1) {
+		    //printf("write faile\n");
+		    return FAILED;
+		}
 		else{
 			//printf("write %lld bytes to offset %llu\n", r, LBA);
 			return SUCCESS;

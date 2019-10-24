@@ -505,7 +505,7 @@ namespace sshkv {
                 }
             }
             thread->stats.AddBytes(bytes);
-            while (arg.pending != 0) {/*printf("pending : %d\n", arg.pending); */}
+            while (arg.pending != 0) {/*printf("pending : %ld\n", arg.pending.load(std::memory_order_relaxed));*/ }
             //fclose(fp);
         }
 

@@ -22,8 +22,8 @@ namespace sshkv {
             : max_LBA_size((uint64_t) 10 * 1024 * 1024 * 1024),
               Physical_size((uint64_t) 5 * 1024 * 1024 * 1024),
               max_SCM_size(1500 * 100 * 100),
-              DISK("/dev/sde"),
-              max_subsystem_num(1) {
+              DISK("TestFile"),
+              max_subsystem_num(4) {
 
     }
     /*StartupOptions::StartupOptions()

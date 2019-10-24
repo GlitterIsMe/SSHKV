@@ -14,6 +14,7 @@
 #include "../include/BGThread.h"
 #include "../include/Options.h"
 #include "../include/DB.h"
+#include "../include/debug.h"
 
 
 namespace sshkv{
@@ -32,7 +33,8 @@ namespace sshkv{
 					//printf("max LBA size : %lu\n", max_LBA_size);
 					uint64_t LBA_size_per_system = max_LBA_size / subsystem_num;
 					size_t SCM_size_per_system = max_SCM_size / subsystem_num;
-					fd = open(DISK.c_str(), O_RDWR);
+					fd = open(DISK.c_str(), O_CREAT | O_RDWR);
+					DBGprint("open ssd file: %s\n", DISK.c_str());
 					if(fd == -1){
 						printf("disk opend failed\n");
 					}
