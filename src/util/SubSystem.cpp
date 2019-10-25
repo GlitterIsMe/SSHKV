@@ -526,9 +526,9 @@ namespace sshkv{
             std::unique_lock<std::mutex> lk(mu);
 			//cv.wait(lk, Scheduled());
             while(request_queue.empty()){
-		system_busy = false;
-                if(!run) return ;
-		//printf("wait for notifying\n");
+		    system_busy = false;
+		    if(!run) return ;
+		        //printf("wait for notifying\n");
                 cv.wait(lk);
             }
             //printf("has been notified and to execute\n");
